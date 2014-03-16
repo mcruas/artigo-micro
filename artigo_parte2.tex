@@ -1,0 +1,296 @@
+
+
+\documentclass[
+	% -- opções da classe memoir --
+	article,			% indica que é um artigo acadêmico
+	12pt,				% tamanho da fonte
+	oneside,			% para impressão apenas no verso. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{hyperref}
+\usepackage{cmap}				% Mapear caracteres especiais no PDF
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+%\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+
+
+% ---
+% ---
+% Pacotes matemáticos
+% ---
+\usepackage{amsthm,amsfonts,amssymb} % Estilo matematico da American Mathematical Society.
+\usepackage{amsmath}
+\newtheorem{teo}{Teorema}
+\newtheorem{lema}{Lema}
+\newtheorem{cor}{Corolário}
+\newtheorem{prop}{Proposição}
+\newtheorem{defn}{Definição}
+% ---
+% Pacote de desenhar diagrama
+% ---
+\usepackage[all]{xy}
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+		
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+% ---
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Trabaho de Microeconomia II:\\[1cm] \textbf{Modelo Agente-Principal aplicado aos guardas brasileiros}}
+\autor{Magno Massao Yamaguchi\thanks{Aluno de Mestrado em Economia Aplicada - PPGE/UFRGS, email: magno.yamaguchi@gmail.com}\\ Marcelo Castiel Ruas\thanks{Aluno de Mestrado em Economia Aplicada - PPGE/UFRGS, email: mcrual@gmail.com}}
+\local{Porto Alegre}
+\data{2013}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={Modelo de artigo científico com abnTeX2},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{atigo científico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ---
+% Altera as margens padrões
+% ---
+%\setlrmarginsandblock{4cm}{4cm}{*}
+%\setulmarginsandblock{4cm}{4cm}{*}
+%\checkandfixthelayout
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Espaçamento simples
+\SingleSpacing
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+
+\section*{Introdução}
+
+Segundo a \citeonline{constituicao_brasil}, a polícia no Brasil é divida em cinco órgãos: polícia federal, polícia rodoviária federal, polícia ferroviária federal, policiais civis e polícias militares e corpos de bombeiros militares. Embora dividida em instituições distintas, sua finalidade é a mesma:
+
+\begin{quotation}
+Art. 144. A segurança pública, dever do Estado, direito e responsabilidade de todos, é exercida para a preservação da ordem pública e da incolumidade das pessoas e do patrimônio \footnote{\url{http://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm}. Acessado em 10/12/2013}
+\end{quotation}
+
+A manutenção da segurança pública é essencial para o bom funcionamento da economia. A instituição policial tem o poder de coerção às atividades criminosas, determinadas pelas instituições de direito definidas para um território qualquer, e por isso são utilizadas para criar reserva de mercado, impedindo a entrada de competidores que não adquiram o direito de propriedade sobre um determinado bem - e.g. pirataria -, garantir a propriedade privada de bens e insumos - e.g. impedir a escravização de um indivíduo, a invasão de um terreno ou uma casa, entre outros - e, no geral, são o principal instrumento de garantia institucional de uma economia.
+
+Como instituição central no funcionamento da economia, a qualidade do serviço prestado pelos policiais deve ser boa, garantindo assim pleno funcionamento dos mercados. Quando o trabalho dos policiais é bem feito, com um alto índice de criminosos detidos e com um alto índice de crimes solucionados (pelo menos, dentro das funções que cabe à polícia), a incerteza é menor, refletida em uma maior simetria de informação entre os agentes em relação à aquisição de um bem ou de um insumo. A análise que se segue para a avaliação das ações dos policiais se baseia em dois princípios: de que a alta assimetria de informação referente à qualidade do trabalho executado pelo policial gera externalidades negativas para a economia e de que, a partir de uma modificação no modelo de \textit{screening} de \citeonline{rotschild_stiglitz_1976}, é possível desenhar um bom mecanismo de incentivos para uma melhor atuação dos policiais.
+
+Uma discussão sobre os dois pontos se faz necessária. A justificativa para buscar-se o melhor desempenho dos policiais se baseia na existência de externalidades geradas a partir da qualidade da atuação dos policiais. Se os policiais atuam bem, a maior parte dos crimes é rapidamente solucionada e os indivíduos têm menos incentivos a cometer crimes, o que é positivo para toda a população. Quando os policiais atuam mal, então menos crimes são resolvidos e aumenta-se a incerteza com relação às garantias institucionais promovidas pelo Estado e também às assimetrias de informação referentes às ações potencialmente danosas de cada indivíduo para com os seus próximos.
+
+
+[Basear um breve modelo de preferências individuais pela boa atuação dos policiais em Mas-Collel, p. 352]
+
+- assimetria de informação -> não sabe quanto eles se esforçam
+
+\section{Propostas de melhoria}
+
+Com base no conhecimento dos problemas acima, 
+
+\subsection{Modelo de novo contrato para os policiais}
+
+O modelo de \citeonline{rotschild_stiglitz_1976} pode ser utilizado para propor uma melhoria na produtividade de trabalhadores e, em particular, também dos policiais. O modelo foi inicialmente proposto para o mercado de seguros, em que um indivíduo paga $a_1$ para adquirir um seguro para um determinado evento $A$, que ocorrendo com uma probabilidade $p$ lhe causa um prejuízo de $d$. Uma vez que ele está segurado, na ocorrência do evento $A$, receberá o prêmio $a_2$. Assim, o indivíduo irá decidir se assegurar se a utilidade esperada for maior havendo contratando seguro do que não havendo. 
+
+A seguradora deve oferecer contratos com valores de $a_1$ e $a_2$ que condigam com a expectativa da utilidade dos indivíduos e com sua maximização de lucros. No entanto, ela não possui informações sobre o valor da probabilidade $p$, caracterizando, assim, a assimetria de informações nesse mercado. Além disso,  diferentes indivíduos possuem riscos diferentes para a ocorrência do evento $A$. Sabendo disso, a seguradora pode oferecer contratos diferentes que vão ser atrativos para aqueles clientes com propensões de risco diferentes. 
+
+Adaptando o modelo pode-se tratar da produtividade de um trabalhador (nesse caso em particular, o policial) ao invés do mercado de seguros. Assim, permite-se fazer a avaliação dos possíveis tipos de trabalhadores, e como fazer com que a instituição forneça contratos que estimule seus funcionários de alta produtividade a se esforçarem em suas tarefas, atingindo bons resultados. Considere um trabalhador representativo que possua uma função de utilidade qualquer $U(e,w)$ , que seja crescente para o salário e decrescente para o esforço.
+
+*** desenvolver ***
+
+
+Primeiramente, a definição dos policiais bons e ruins se dá em duas características distintas: o quanto o salário fixo influencia na sua decisão de não se esforçar e o qual o potencial que um salário fixo tem em melhorar o seu esforço e desempenho como policial. Além disso, existe a própria decisão da instituição "polícia" em averiguar a qualidade do serviço prestado por todos os policiais, e esta está relacionada com a estrutura de incentivos que se cria para o bom desempenho das funções por parte dos policiais e pelo desempenho da própria corporação.
+
+
+
+\subsubsection*{Incentivos para que trabalhem mais: remuneração variável por multa}
+
+
+Divide-se, portanto, os policiais por qualificações de acordo com o esforço empregado por eles e a qualidade do serviço dados os salários fixos e variáveis. Os bons policiais aceitam uma remuneração fixa de $x$ e uma remuneração variável de $y$ para desempenhar um bom papel, enquanto os ruins precisam de uma remuneração $x + \Delta x$ fixo e não possuem um mínimo para a variável (visto que a compensação dos criminosos sempre pode ser maior em relação a determinados delitos, como por exemplo o tráfico de drogas).
+
+[Basear um breve modelo de preferências dos policiais por determinados níveis de esforço em Mas-Collel, p. 461]
+
+O primeiro argumento de nosso trabalho se pauta no desenho das externalidades geradas pela atuação dos policiais. Primeiramente, define-se uma função de produção do serviço executado pela polícia, que emprega uma quantidade de capital, i.e. material para o trabalho do policial, como armas, viaturas e instrumentos de avaliação do trabalho destes (como câmeras) e dos próprios policiais. A fim de demonstrarmos que, além da própria 
+
+A participação nos lucros de empresas é um artifício que vêm sendo usado por inúmeras empresas no Brasil como forma de incentivo para aumentar a produtividade do trabalhador.  Como alguns dos incentivos para (...)
+
+Diversos estudos mostram que a existência de um plano para remunerar os funcionários mais produtivos resulta num aumento de produtivade efetiva. \citeonline{neto2006} aplicou 
+
+
+
+
+\subsection{Críticas à solução}
+
+A solução de incentivos, embora seja justificada economicamente, pode sofrer diversas críticas, entre as quais enumera-se algumas abaixo.
+
+\subsubsection*{Mal vista pela população} 
+
+A remuneração por multa é mal vista pela população. A opinião pública, em geral, se mostra avessa à ideia da multa, em muitas vezes se referindo a uma política de intensificação da fiscalização como uma "política arrecadatória".
+Além do fato de estarmos lidando com dinheiro público, a população em geral percebe que   A corrupção existente no setor público no Brasil é um mal conhecido. Assim, a probabilidade que inúmeros agentes tenham conduta imoral é alta.
+
+Projeto de Lei 4900/09 proíbe a remuneração variável por multas. Como justificativa apresentada está justamente 
+
+\begin{quote}
+Proíbe incentivos pecuniários e promocionais a agentes públicos em razão do exercício do poder de polícia em atividades de segurança pública.
+\end{quote}
+
+As duas justificativas apresentadas são:
+(1) a motivação do agente não deve ser o benefício privado da sua remuneração variável, mas sim suas atribuições como agente que 
+(2) 
+
+
+- propor solução, da utilização de câmeras para ter provas concretas.
+
+\subsection{Utilização de câmeras para reduzir a corrupção}
+
+O avanço tecnológico pode trazer novos meios para se combater o comportamento ilícito dos inerente a essa mudança e torná-la viável. A utilização de câmeras vestíveis, por parte dos policiais, é uma alternativa viável - embora custosa - para tentar fazer o comportamento dos policiais ir ao encontro daquele desejado pela sociedade.
+
+Possuindo sua rotina gravada, a assimetria de informação entre as ações esperadas e realizadas pelos policiais tenderia a diminuir bastante. Desse modo, embora 
+qualquer tentativa de corrupção ou de tentativa de  que surge como consequência de oferecer incentivos para o aumento de autuações. 
+
+Uma matéria publicada na revista The Economist \cite{theeconomist} cita a experiência de um ano da cidade americana de Rialto (EUA) em que metade dos policiais utilizavam as câmeras durante todo o expediente. Assim, qualquer infração que o policial assinale poderá ser conferida através de um vídeo. Como todas as autuações policiais são gravadas, haverá uma diminuição dos casos em que a infração é uma invenção do policial, ou ainda que a estes possuam comportamente exageradamente violento.
+No período analisado em Rialto, o número de reclamações dos policiais foi reduzida a um terço, demonstrando que a população pode ser beneficiada diretamente com essa medida.
+Na época dos protestos ocorridos em junho de 2013, grande parte da polêmica que ocupou a grande mídia foi acerca da existência ou não de abuso policial nos confrontos com a população. Caso essa medida tivesse sido implantada no Brasil, seria possível verificar o que aconteceu antes, durante e depois dos confrontos. Dessa forma, os policiais estariam protegidos de falsas denúncias, quando estivessem intervindo para retalhar indivíduos violentos, assim como 
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+%---
+%
+% Se desejar escrever o artigo em duas colunas, descomente a linha abaixo
+% e a linha com o texto ``FIM DE ARTIGO EM DUAS COLUNAS''.
+% \twocolumn[    		% INICIO DE ARTIGO EM DUAS COLUNAS
+%
+%---
+% página de titulo
+\maketitle
+
+% resumo em português
+\begin{resumoumacoluna}
+
+ 
+ \vspace{\onelineskip}
+ 
+ \noindent
+ \textbf{Palavras-chaves}: .
+\end{resumoumacoluna}
+
+% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+
+
+% ---
+% Conclusão
+% ---
+
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+
+
+
+\end{document}
